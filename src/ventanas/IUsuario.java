@@ -886,7 +886,7 @@ private void bntGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         No están validados para ingresar textos y solo números es recomendable usas condiciones 
         para ingresar si es un campo para ingresar solo números y solo letras, Y en caso del campo 
         de teléfono falta validar la longitud solo ingreso de 11 dígitos como máximo y en campo de
-        condigo no debería de habilitarse para poder editar ya que se incrementa solo.
+        condigo no debería de habilitarse para poder editar ya que se incrementa solo en el sistema 
                 
         */
     if(ECampos.esObligatorio(this.pnlCmpObligatorios,true))  
