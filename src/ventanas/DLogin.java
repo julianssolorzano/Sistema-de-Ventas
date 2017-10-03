@@ -207,6 +207,8 @@ public class DLogin extends javax.swing.JDialog {
         bntCancelarConfig.setBackground(new java.awt.Color(51, 153, 255));
         bntCancelarConfig.setText("Continuar");
         bntCancelarConfig.addActionListener(new java.awt.event.ActionListener() {
+             //Botón cancelar de Login Para el acceso al sistema el botón CANCELAR no cumple la función cancelar de proceso
+            //de ingreso, muestra la interfaz con USUARIO ya predeterminado y CONTRASEÑA. 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntCancelarConfigActionPerformed(evt);
             }
