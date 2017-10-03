@@ -879,6 +879,16 @@ private void bntModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_bntModificarActionPerformed
 
 private void bntGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntGrabarActionPerformed
+    
+    
+        /*
+        Los campos DNI, NOMBRE, APELLIDO, TELEFONO, 
+        No están validados para ingresar textos y solo números es recomendable usas condiciones 
+        para ingresar si es un campo para ingresar solo números y solo letras, Y en caso del campo 
+        de teléfono falta validar la longitud solo ingreso de 11 dígitos como máximo y en campo de
+        condigo no debería de habilitarse para poder editar ya que se incrementa solo.
+                
+        */
     if(ECampos.esObligatorio(this.pnlCmpObligatorios,true))  
     {
        JOptionPane.showInternalMessageDialog(this, "Los campos Marcados "+
