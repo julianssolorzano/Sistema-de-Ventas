@@ -295,6 +295,9 @@ public class DLogin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntIngresarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bntIngresarActionPerformed
+        /* Ingresar al sistema Al tratar de ingresas al sistema con el usuario predeterminado nos muestra un error al primer intento
+         - en el segundo intento entra con la misma contraseña y el usuario         
+         */
         if(!this.txtUsuario.getText().isEmpty() && !String.copyValueOf(this.ptxtPass.getPassword()).isEmpty())
         {
             String msg = "";
