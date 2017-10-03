@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+//marly_yupanqui en este clase se encoentro algunos incombenientes como por ejemplo en el boton CANCELAR
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
