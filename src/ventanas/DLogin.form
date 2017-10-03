@@ -364,6 +364,8 @@
                 <Component class="javax.swing.JButton" name="bntIngresar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ingresar"/>
+                    //Ingresar al sistema Al tratar de ingresas al sistema con el usuario predeterminado nos muestra un error al primer intento.
+                    //  en el segundo intento nos muestra un mensaje de acceso al sistema con el mismo usuario predeterminado y contraseña incorrecta
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntIngresarActionPerformed"/>
