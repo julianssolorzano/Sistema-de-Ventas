@@ -3,7 +3,10 @@
  * and open the template in the editor.
  */
 package ventanas;
-
+/* Los campos de Usuario no se encuentran validados y tampoco ninguno de los campos
+--Configuración Predeterminada Al momento de optar por la opción SI para acceder al sistema, 
+nos dirige al formulario principal.
+*/
 import config.AppConfig;
 import controllers.CAlmacen;
 import controllers.CEncargadoAlmacen;
