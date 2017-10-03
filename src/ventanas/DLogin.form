@@ -347,7 +347,11 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JButton" name="bntCancelar">
+                <Component class="javax.swing.JButton" name="bntCancelar"> 
+                // Para el acceso al sistema el botón CANCELAR no cumple la función cancelar de proceso de ingreso, 
+              //  muestra la interfaz con USUARIO ya predeterminado y CONTRASEÑA. 
+ 
+ 
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cancelar"/>
                   </Properties>
