@@ -769,7 +769,9 @@ public class IProveedores extends javax.swing.JInternalFrame {
         chbEstado.setEnabled(true);
     }//GEN-LAST:event_bntModificarActionPerformed
 
-    private void bntNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntNuevoActionPerformed
+    private void bntNuevoActionPerformed(java.awt.event.ActionEvent evt) {
+        // El boton nuevo realiza la limpieza excepto txtAProductos.
+        //GEN-FIRST:event_bntNuevoActionPerformed
        //ECampos.buscarBotones(this.pnlBuscador, false, null);
        ECampos.setEditableTexto(this.pnlEntradas, true, null,true,"");
        this.bntModificar.setEnabled(false);
@@ -800,7 +802,16 @@ public class IProveedores extends javax.swing.JInternalFrame {
        this.pnlBuscador.setVisible(true);
     }//GEN-LAST:event_bntCancelarActionPerformed
 
-    private void bntGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntGuardarActionPerformed
+    private void bntGuardarActionPerformed(java.awt.event.ActionEvent evt) {
+        
+        /**
+         * El boton guardar 
+         * El error encontrado al momento de perdir
+         * solamente llenar tres campos y consecunetemente los demas campos
+         * quedan vacios, esto error no es aceptable para llevar un registro
+         * adecuado de un proveedor
+         */
+        //GEN-FIRST:event_bntGuardarActionPerformed
        if(esActualizacion)
        {
            if(!this.verficarCambios())
