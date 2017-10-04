@@ -77,19 +77,78 @@ public class IProveedores extends javax.swing.JInternalFrame {
     
     private void setProveedor()
     {
-           this.txtRuc.setText(cp.getProveedor().getRuc());
-           this.txtProveedor.setText(cp.getProveedor().getRazonSocial());
-           this.txtCiudad.setText(cp.getProveedor().getCiudad());
-           this.txtAProductos.setText(cp.getProveedor().getProductos());
-           this.txtContacto.setText(cp.getProveedor().getNomContacto());
-           this.txtDireccion.setText(cp.getProveedor().getDireccion());
-           this.txtEmail.setText(cp.getProveedor().getEmail());
-           this.txtFax.setText(cp.getProveedor().getFax());
-           this.txtMovil.setText(cp.getProveedor().getFax());
-           this.txtNextel.setText(cp.getProveedor().getNextel());
-           this.txtNumCuenta.setText(cp.getProveedor().getCtaBancaria());
-           this.txtRubro.setText(cp.getProveedor().getRubro());
-           this.txtTelf.setText(cp.getProveedor().getTelefono());
+           /**
+         * El campo txtRuc no se encuentra valido tanto a la longitus para el
+         * ingreso de datos
+         */
+        this.txtRuc.setText(cp.getProveedor().getRuc());
+
+        /**
+         * El campo txtProveedor no se encuentra valido tanto a la longitus para
+         * el ingreso de datos
+         */
+        this.txtProveedor.setText(cp.getProveedor().getRazonSocial());
+
+        /**
+         * El campo txtCiudad no se encuentra valido tanto a la longitus,porque
+         * permite el ingreso de datos numericos
+         */
+        this.txtCiudad.setText(cp.getProveedor().getCiudad());
+
+        this.txtAProductos.setText(cp.getProveedor().getProductos());
+
+        /**
+         * El campo txtContacto no se encuentra valido, el error encontrado es
+         * la longitud de datos y el tipo de dato permite tipo numerico
+         */
+        this.txtContacto.setText(cp.getProveedor().getNomContacto());
+
+        /**
+         * El campo txtDireccion no se encuentra valido tanto a la longituspara
+         * el ingreso de datos, asi estamos desperdiciando espacio
+         */
+        this.txtDireccion.setText(cp.getProveedor().getDireccion());
+
+        /**
+         * El campo txtEmail no se encuentra valido tanto a la longituspara el
+         * ingreso de datos
+         */
+        this.txtEmail.setText(cp.getProveedor().getEmail());
+
+        /**
+         * El campo txtFax no se encuentra valido tanto a la longitus para el
+         * ingreso de datos
+         */
+        this.txtFax.setText(cp.getProveedor().getFax());
+
+        /**
+         * El campo txtMovil no se encuentra valido tanto a la longitus, y el
+         * tipo de dato al momento de ingreso porque permite datos no
+         * convenientes esta por demas ingresar letra a este campo
+         */
+        this.txtMovil.setText(cp.getProveedor().getFax());
+
+        /**
+         * El campo txtNextel no se encuentra valido tanto a la longitus como
+         * para el ingreso de dato esta por demas el gran error al ingresar dato
+         * de tipo numero
+         */
+        this.txtNextel.setText(cp.getProveedor().getNextel());
+
+        this.txtNumCuenta.setText(cp.getProveedor().getCtaBancaria());
+
+        /**
+         * El campo txtRubro no se encuentra valido tanto a la longitus para el
+         * ingreso de dato
+         */
+        this.txtRubro.setText(cp.getProveedor().getRubro());
+
+        /**
+         * El campo txtTelf no se encuentra valido tanto a la longitus también
+         * para el tipo de dato el error es permitir el ingreso de letras a un
+         * campo de tipo numerico
+         */
+        this.txtTelf.setText(cp.getProveedor().getTelefono());
            if(cp.getProveedor().getActivo() == 1)
            {
               chbSetActivo(true); 
