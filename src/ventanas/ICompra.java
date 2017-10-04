@@ -1,6 +1,17 @@
 
 package ventanas;
 
+
+// el primer  errror encontrado fue el combobox factura en el  que  se  va emitir el tipo de documento  de venta 
+ // se  deberia  desplejar en cada vez que se hace una venta.
+
+// en el boton IMPRIMIR no imprime no hace ninguna funcion
+
+// en el boton CALCULADORA tambien no hace ningun funcion
+
+// en el boton IMPORTAR No importa.
+
+// los campos ingresar valores falta validar  el ingreso  de datos
 import config.AppConfig;
 import controllers.CAlmacenProducto;
 import controllers.CCompra;
@@ -1657,7 +1668,7 @@ public class ICompra extends javax.swing.JInternalFrame {
                 ftfcampo.setValue(value);
             }
             System.out.println("Tabla tiene foco: "+table.hasFocus());
-            return ftfcampo;
+            return ftfcampo;//
         }
 
     }
