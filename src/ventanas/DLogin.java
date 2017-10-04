@@ -1,9 +1,9 @@
+
 /* Los campos de Usuario y contraseña no se encuentran validados y tampoco ninguno de los campos.
 -Configuración Predeterminada Al momento de optar por la opción SI para acceder al sistema, 
 nos dirige al formulario principal.
 */
-/*  en el campo tipo de cambio no deberia acaptar valores nulos, por que es importante mencionar el tipo de cambio 
-
+/*  en el campo tipo de cambio no deberia acaptar valores nulos, por que es importante mencionar el tipo de cambio
 para realizar una venta.
 */
 package ventanas;
@@ -211,10 +211,10 @@ public class DLogin extends javax.swing.JDialog {
         bntCancelarConfig.setBackground(new java.awt.Color(51, 153, 255));
         bntCancelarConfig.setText("Continuar");
         bntCancelarConfig.addActionListener(new java.awt.event.ActionListener() {
+                         public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntCancelarConfigActionPerformed(evt);
              //Botón cancelar de Login Para el acceso al sistema el botón CANCELAR no cumple la función cancelar de proceso
             //de ingreso, muestra la interfaz con USUARIO ya predeterminado y CONTRASEÑA. 
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntCancelarConfigActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
