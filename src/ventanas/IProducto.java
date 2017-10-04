@@ -1,3 +1,12 @@
+     /* VALIDACIONES DE CAJAS
+       - txtCodigoBarras
+        El campo de txtCodigoBarras no esta valido nos permite ingresar letras y eso no se debe permitir,
+        estos códigos sólo pueden almacenar números y los datos son siempre de 13 dígitos de longitud.La
+        mayoría de los códigos de barras se encuentran en los productos son de simbologias UPC o EAN/GS1. Estos 
+        códigos sólo pueden almacenar números 7 y los datos son siempre de 13 dígitos de longitud. El código de 
+        barras del producto no es más que un número único que identifica el tipo de producto.
+       
+     */
 package ventanas;
 
 import controllers.CAlmacen;
@@ -867,6 +876,14 @@ public class IProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bntSalirActionPerformed
 
     private void bntNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntNuevoActionPerformed
+        /*
+        Al momento de ingresar un nuevo producto al precionar el Boton nuevo se deberia suprimir dichas cajas
+        - areaNombre
+        Este campo se deberia suprimir al momento de hacer nuevo y de guardar todo lo ingresado
+        - pnlImagen
+        Al momento de guardar y hacer nuevo se debe visualizar el imagen predeterminado 
+        */
+        
         habilitarCampos(true,true);
         ECampos.buscarBotones(this.pnlBotones, false, new Component[]{bntGuardar,bntCancelar,bntSalir});
          esActualizacion = false;
@@ -970,7 +987,12 @@ public class IProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bntGuardarActionPerformed
 
     private void bntEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEliminarActionPerformed
-        //mostrar almacenes que tienen el producto que va a ser eliminado
+        /*
+        En este caso el boton Eliminar no deja los campos vacios y no se sabe si se a 
+        borrar el producto,en esta caso debe dejara vacios los campos para si saber si se a borrado 
+        */
+        
+        // mostrar almacenes que tienen el producto que va a ser eliminado
         PanelListaProductosAlmacen plpa = new PanelListaProductosAlmacen(product);
          int op=0;
         int nu = JOptionPane.showInternalConfirmDialog(this, (plpa.total!=null?plpa:"¿Realmente desea Eliminar\n producto "+product.getNombre()+
@@ -1111,315 +1133,4 @@ public class IProducto extends javax.swing.JInternalFrame {
              + "¿Desea Cerrar esta ventana?", "Cerrar ventana", JOptionPane.YES_NO_CANCEL_OPTION);
          if(nu == JOptionPane.OK_OPTION)
          { 
-            iniciarDatos(); 
-            this.dispose();
-         }
-    }
-    
-    private void guardarProducto(boolean conImagen)
-    {
-        Producto prd = new Producto();
-        setValoresProducto(prd);
-        
-        //this.setUsuario(pvc.getSeleccionado());
-        boolean gr = controllerProducto.guardarRegistro(prd);
-        if(gr)
-        {
-            this.calmacen.setNumPaginador(0, 50);
-            ArrayList<Almacen> registros = calmacen.getRegistros();
-            CAlmacenProducto cap = new CAlmacenProducto();
-            AlmacenProducto ap = null;
-            controllerProducto.setNumPaginador(0, 50);
-            prd = controllerProducto.getRegistroPorCodigo(prd.getCodigo());
-            //registra este producto en todos los almacenes
-            for(Almacen al: registros)
-            {
-                ap = new AlmacenProducto();
-                ap.setAlmacen(al);
-                ap.setProducto(prd);
-                ap.setCantidadActual(0);
-                ap.setCantidadInicial(0);
-                ap.setFecha(Calendar.getInstance().getTime());
-                ap.setTipoManipulacion(AlmacenProducto.TIPO_AGREGAR[3]);
-                if(al.getActivo() == 0)
-                {
-                    ap.setActivo(0);
-                }
-                cap.guardarRegistro(ap);
-                System.out.println("Contaodoo");
-            }
-            
-            PanelAperturaDeInventario pvc = new PanelAperturaDeInventario(prd);
-            JLabel aviso = new JLabel();
-            aviso.setVisible(false);
-            JOptionPane.showInternalOptionDialog(this, pvc, "Registro Guardado. ¿Desea Ingresar Cantidades?",JOptionPane.OK_CANCEL_OPTION,
-                                                JOptionPane.QUESTION_MESSAGE, null, new Object[]{aviso},null);
-            if(pvc.isAceptado())
-            {
-                int grabarDatos = pvc.grabarDatos();
-                if(grabarDatos>0)
-                {
-                    JOptionPane.showInternalMessageDialog(this, "Cantidades registradas correctamente", "Cantidades Registradas",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-            JOptionPane.showInternalMessageDialog(this, "Producto Registrado Correctamente", "Producto Registrado",
-                            JOptionPane.INFORMATION_MESSAGE);            
-                  
-            totalProductos = controllerProducto.getTotalRegistros();
-            habilitarCampos(false,true);
-            getMostrarUltimoProductos();            
-            ECampos.buscarBotones(this.pnlBotones, true, new Component[]{bntGuardar,bntCancelar});
-       }
-    }
-    
-    public void actualizarProductos(boolean conImagen)
-    {
-       if(product!= null)
-       {
-         setValoresProducto(product); 
-         int gr = controllerProducto.actualizarRegistro(product);
-         if(gr != 0)
-         {
-             PanelAperturaDeInventario pvc = new PanelAperturaDeInventario(product);
-            JLabel aviso = new JLabel();
-            pvc.setEsActualizacion();
-            aviso.setVisible(false);
-            JOptionPane.showInternalOptionDialog(this, pvc, "Registro Actualizado. ¿Desea Modifcar las Cantidades existentes en los Almacenes?",JOptionPane.OK_CANCEL_OPTION,
-                                                JOptionPane.QUESTION_MESSAGE, null, new Object[]{aviso},null);
-            if(pvc.isAceptado())
-            {
-                int grabarDatos = pvc.grabarDatos();
-                if(grabarDatos>0)
-                {
-                    JOptionPane.showInternalMessageDialog(this, "Cantidades Actualizadas correctamente", "Cantidades Actualizadas",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
-                JOptionPane.showInternalMessageDialog(this, "Producto Actualizado Correctamente", "Producto Actualizado",
-                            JOptionPane.INFORMATION_MESSAGE);
-                
-            }
-            
-            habilitarCampos(false,true);
-            ECampos.buscarBotones(this.pnlBotones, true, new Component[]{bntGuardar,bntCancelar});
-            this.setValoresCampos(product);
-            this.esActualizacion = false;       
-         }
-       }        
-    }
-    
-    public void setValoresProducto(Producto prd)
-    {
-        prd.setCodigo(this.txtCodigo.getText());
-        prd.setCodigoBarras(this.txtCodigoBarras.getText());
-        prd.setCodigoDelFabricante(this.txtCodeFabricante.getText());
-        prd.setNombre(this.areaNombre.getText());
-        prd.setCosto(Double.parseDouble(this.ftxtCosto.getValue().toString()));
-        prd.setPrecioAlMayor(Double.parseDouble(this.ftxtPrecioAlMayor.getValue().toString()));
-        prd.setPrecioAlMenor(Double.parseDouble(this.ftxtPrecioAlMenor.getValue().toString()));
-        prd.setUtilidad(new Integer(this.ftxtUtilidad.getValue().toString()));
-        prd.setAplicaIGV(1);
-        if(!this.chbAplicarIGV.isSelected())
-        {
-            prd.setAplicaIGV(0);
-        }
-        prd.setStockMinimo(new Integer(this.ftxtStockMinimo.getValue().toString()));
-        Enumeration<AbstractButton> elements = buttonGroup1.getElements();
-        while(elements.hasMoreElements())
-        {
-            AbstractButton nextElement = elements.nextElement();
-            if(nextElement.isSelected())
-            {
-                prd.setTipo(nextElement.getText());
-                System.out.println(nextElement.getText());
-                break;
-            }
-        }
-        
-        if(this.cmbTipoMoneda.getSelectedItem() != null)
-        {
-            prd.setIdMoneda(((Moneda)cmbTipoMoneda.getSelectedItem()).getPrimaryKey());
-        }
-        
-        if(imagen != null)
-        {
-            prd.setImagenDA(dat);
-        }
-              
-        
-        if(this.cmbClase.getSelectedIndex() != -1)
-        {
-            if(this.cmbClase.getSelectedIndex() > 0)
-            {
-                prd.setIdClase(((SimpleModelo)cmbClase.getSelectedItem()).getPrimaryKey());
-            }
-        }
-        
-        if(this.cmbMarca.getSelectedIndex() != -1)
-        {
-            if(this.cmbMarca.getSelectedIndex() > 0)
-            {
-                prd.setIdMarca(((SimpleModelo)cmbMarca.getSelectedItem()).getPrimaryKey());
-            }
-        }
-        
-        if(this.cmbModelo.getSelectedIndex() != -1)
-        {
-            if(this.cmbModelo.getSelectedIndex() > 0)
-            {
-                prd.setIdModelo(((SimpleModelo)cmbModelo.getSelectedItem()).getPrimaryKey());
-            }
-        }
-        
-        prd.setUbicacion(this.txtUbicacion.getText());
-        prd.setUnidadPrincipal(this.cmbUnidadPrincipal.getSelectedItem().toString());
-        prd.setPeso(new Double(this.ftxtPeso.getValue().toString()));
-    }
-    
-    public void habilitarCampos(boolean opcion,boolean limpiar)
-    {
-        ECampos.setEditableTexto(this.pnlCodes, opcion, null, limpiar, "");
-        ECampos.setEditableTexto(this.pnlDetalles, opcion, null, limpiar, "");
-        ECampos.setEditableTexto(this.pnlPrecios, opcion, null, limpiar, "");
-        ECampos.setEditableTexto(this.pnlCantidades1, opcion, null, limpiar, "");
-        Enumeration<AbstractButton> elements = buttonGroup1.getElements();
-        while(elements.hasMoreElements())
-        {
-            elements.nextElement().setEnabled(opcion);
-        }
-        chbAplicarIGV.setEnabled(opcion);
-        ECampos.buscarBotones(this.pnlBotones, opcion, null); 
-        this.bntSelecFoto.setEnabled(opcion);
-    }
-    
-    private void setValoresCampos(Producto prd)
-    {
-       txtCodigo.setText(prd.getCodigo());
-       txtCodigoBarras.setText(prd.getCodigoBarras());
-       txtCodeFabricante.setText(prd.getCodigoDelFabricante());
-       areaNombre.setText(prd.getNombre());
-       ftxtCosto.setValue(prd.getCosto());
-       ftxtPrecioAlMayor.setValue(prd.getPrecioAlMayor());
-       ftxtPrecioAlMenor.setValue(prd.getPrecioAlMenor());
-       ftxtUtilidad.setValue(prd.getUtilidad());
-       if(prd.getAplicaIGV()==1)
-       {
-           chbAplicarIGV.setSelected(true);
-       }   
-       ftxtStockMinimo.setValue(prd.getStockMinimo());
-       Enumeration<AbstractButton> elements = buttonGroup1.getElements();
-        while(elements.hasMoreElements())
-        {
-            AbstractButton nextElement = elements.nextElement();
-            if(nextElement.getText().equals(prd.getTipo()))
-            {
-                nextElement.setSelected(true);
-                break;
-            }
-        }
-        int ic = cmbTipoMoneda.getItemCount();
-        for(int i=0;i<ic;i++)
-        {
-            Integer primaryKey = ((Moneda)cmbTipoMoneda.getItemAt(i)).getPrimaryKey();
-            if(primaryKey == prd.getIdMoneda())
-            {
-               cmbTipoMoneda.setSelectedIndex(i);
-               break;
-            }
-        }        
-        
-        setValuesCombos(cmbClase,prd.getIdClase());
-        setValuesCombos(cmbMarca,prd.getIdMarca());
-        setValuesCombos(cmbModelo,prd.getIdModelo());
-        txtUbicacion.setText(prd.getUbicacion());
-        cmbUnidadPrincipal.setSelectedItem(prd.getUnidadPrincipal());
-        ftxtPeso.setValue(prd.getPeso());
-       
-    }
-    
-    private void setValuesCombos(JComboBox cb,Integer id)
-    {
-       int ic = cb.getItemCount(); 
-        for(int i=0;i<ic;i++)
-        {
-            Integer primaryKey = ((SimpleModelo)cb.getItemAt(i)).getPrimaryKey();
-            if(primaryKey == id)
-            {
-               cb.setSelectedIndex(i);
-               break;
-            }
-        }
-    }
-    
-    public void habilitarBotonesPaginador(boolean opcion)
-    {
-      ECampos.buscarBotones(this.pnlPaginador, opcion, null);  
-    }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea areaNombre;
-    private elaprendiz.gui.button.ButtonRect bntAnterior;
-    private elaprendiz.gui.button.ButtonRect bntBuscar;
-    private elaprendiz.gui.button.ButtonRect bntCancelar;
-    private elaprendiz.gui.button.ButtonRect bntEliminar;
-    private elaprendiz.gui.button.ButtonRect bntGuardar;
-    private elaprendiz.gui.button.ButtonRect bntModificar;
-    private elaprendiz.gui.button.ButtonRect bntNuevo;
-    private elaprendiz.gui.button.ButtonRect bntPrimero;
-    private elaprendiz.gui.button.ButtonRect bntSalir;
-    private elaprendiz.gui.button.ButtonRect bntSelecFoto;
-    private elaprendiz.gui.button.ButtonRect bntSiguiente;
-    private elaprendiz.gui.button.ButtonRect bntUltimo;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JCheckBox chbAplicarIGV;
-    private elaprendiz.gui.comboBox.ComboBoxRectIcon cmbClase;
-    private elaprendiz.gui.comboBox.ComboBoxRectIcon cmbMarca;
-    private elaprendiz.gui.comboBox.ComboBoxRectIcon cmbModelo;
-    private elaprendiz.gui.comboBox.ComboBoxRectIcon cmbTipoMoneda;
-    private elaprendiz.gui.comboBox.ComboBoxRect cmbUnidadPrincipal;
-    private javax.swing.JFormattedTextField ftxtCosto;
-    private javax.swing.JFormattedTextField ftxtPeso;
-    private javax.swing.JFormattedTextField ftxtPrecioAlMayor;
-    private javax.swing.JFormattedTextField ftxtPrecioAlMenor;
-    private javax.swing.JFormattedTextField ftxtStockMinimo;
-    private javax.swing.JFormattedTextField ftxtUtilidad;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel pnlBotones;
-    private javax.swing.JPanel pnlCantidades1;
-    private javax.swing.JPanel pnlCodes;
-    private elaprendiz.gui.panel.PanelImage pnlContenedor;
-    private javax.swing.JPanel pnlDetalles;
-    private elaprendiz.gui.panel.PanelImage pnlImagen;
-    private javax.swing.JPanel pnlPaginador;
-    private javax.swing.JPanel pnlPrecios;
-    private javax.swing.JRadioButton rbCompomente;
-    private javax.swing.JRadioButton rbInsumo;
-    private javax.swing.JRadioButton rbProductoTerminado;
-    private javax.swing.JTable tblProductosAlmacen;
-    private elaprendiz.gui.textField.TextField txtCodeFabricante;
-    private elaprendiz.gui.textField.TextField txtCodigo;
-    private elaprendiz.gui.textField.TextField txtCodigoBarras;
-    private elaprendiz.gui.textField.TextField txtUbicacion;
-    // End of variables declaration//GEN-END:variables
-}
+            iniciar
