@@ -235,7 +235,7 @@ public class DLogin extends javax.swing.JDialog {
         pnlLogin.add(jLabel6, gridBagConstraints);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Contraseña:");
+        jLabel7.setText("Contraseña:");////
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
