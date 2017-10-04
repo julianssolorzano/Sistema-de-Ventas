@@ -1,12 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package ventanas;
-/* Los campos de Usuario no se encuentran validados y tampoco ninguno de los campos
---Configuración Predeterminada Al momento de optar por la opción SI para acceder al sistema, 
+/* Los campos de Usuario y contraseña no se encuentran validados y tampoco ninguno de los campos.
+-Configuración Predeterminada Al momento de optar por la opción SI para acceder al sistema, 
 nos dirige al formulario principal.
 */
+/*  en el campo tipo de cambio no deberia acaptar valores nulos, por que es importante mencionar el tipo de cambio 
+
+para realizar una venta.
+*/
+package ventanas;
+
 import config.AppConfig;
 import controllers.CAlmacen;
 import controllers.CEncargadoAlmacen;
@@ -268,6 +269,9 @@ public class DLogin extends javax.swing.JDialog {
         pnlLogin.add(bntCancelar, gridBagConstraints);
 
         bntIngresar.setText("Ingresar");
+         /* Ingresar al sistema Al tratar de ingresas al sistema con el usuario predeterminado nos muestra un error al primer intento
+         - en el segundo intento entra con la misma contraseña y el usuario         
+         */
         bntIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntIngresarActionPerformed(evt);
@@ -298,9 +302,7 @@ public class DLogin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntIngresarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_bntIngresarActionPerformed
-        /* Ingresar al sistema Al tratar de ingresas al sistema con el usuario predeterminado nos muestra un error al primer intento
-         - en el segundo intento entra con la misma contraseña y el usuario         
-         */
+       
         if(!this.txtUsuario.getText().isEmpty() && !String.copyValueOf(this.ptxtPass.getPassword()).isEmpty())
         {
             String msg = "";
